@@ -1,5 +1,5 @@
 # Use Java 17 base image
-FROM eclipse-temurin:21-jdk-alpine AS build
+FROM eclipse-temurin:17-jdk-alpine AS build
 
 # Set working directory
 WORKDIR /app
@@ -8,6 +8,9 @@ WORKDIR /app
 COPY mvnw .
 COPY .mvn .mvn
 COPY pom.xml .
+
+# Make mvnw executable
+RUN chmod +x mvnw
 
 # Download dependencies
 RUN ./mvnw dependency:go-offline -B
